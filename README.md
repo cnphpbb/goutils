@@ -5,4 +5,4 @@
 
 |pkg Name| Installs | Godocs |fork|
 |:---|:---|:---|:---|
-|log|go get github.com/cnphpbb/go_utils/log|[log]()|
+|log|go get github.com/cnphpbb/go_utils/log|[log](https://gowalker.org/github.com/cnphpbb/go_utils/log)|[gogs/modules/log](https://github.com/gogits/gogs/tree/master/modules/log)|
