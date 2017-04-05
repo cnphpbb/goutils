@@ -1,4 +1,4 @@
-package main
+package randHashGenerator
 
 import (
 	"crypto/rand"
