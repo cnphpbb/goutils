@@ -51,5 +51,22 @@ func Test_Get_3(t *testing.T) {
 	} else {
 		t.Error("第3个测试没通过")
 	}
+}
 
+func Test_Get_4(t *testing.T) {
+	length := 7
+	hashGen := NewHashGen(length)
+	for i := 0; i < 100; i++ {
+		randStr = hashGen.Get()
+		t.Log(i, randStr)
+	}
+}
+
+func NewHashGen(length int) *HashGenerator {
+	hashGen = &HashGenerator{
+		make(chan string),
+		length,
+	}
+	hashGen.init()
+	return hashGen
 }
