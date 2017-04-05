@@ -7,6 +7,20 @@ import (
 var hashGen *HashGenerator
 var randStr string
 
+func init() {
+	length := 9
+	hashGen = NewHashGen(length)
+}
+
+func Test_Get_0(t *testing.T) {
+	t.Log("第0个测试开始")
+	for i := 0; i < 100; i++ {
+		randStr = hashGen.Get()
+		t.Log(i, randStr)
+	}
+	t.Log("第0个测试结束")
+}
+
 func Test_Get_1(t *testing.T) {
 	length := 8
 	hashGen = &HashGenerator{
@@ -56,10 +70,12 @@ func Test_Get_3(t *testing.T) {
 func Test_Get_4(t *testing.T) {
 	length := 7
 	hashGen := NewHashGen(length)
+	t.Log("第4个测试开始")
 	for i := 0; i < 100; i++ {
 		randStr = hashGen.Get()
 		t.Log(i, randStr)
 	}
+	t.Log("第4个测试结束")
 }
 
 func NewHashGen(length int) *HashGenerator {
