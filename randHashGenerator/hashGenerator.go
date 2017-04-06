@@ -6,17 +6,17 @@ import (
 )
 
 type HashGenerator struct {
-	HashGetter chan string
-	Length     int
+	hashGetter chan string
+	length     int
 }
 
-func (this *HashGenerator) Init() {
+func (this *HashGenerator) init() {
 	go func() {
 
 		for {
 			str := ""
 
-			for len(str) < this.Length {
+			for len(str) < this.length {
 				c := 10
 				bArr := make([]byte, c)
 				_, err := rand.Read(bArr)
@@ -26,7 +26,7 @@ func (this *HashGenerator) Init() {
 				}
 
 				for _, b := range bArr {
-					if len(str) == this.Length {
+					if len(str) == this.length {
 						break
 					}
 
@@ -54,11 +54,31 @@ func (this *HashGenerator) Init() {
 
 			}
 
-			this.HashGetter <- str
+			this.hashGetter <- str
 		}
 	}()
 }
 
 func (this *HashGenerator) Get() string {
-	return <-this.HashGetter
+	return <-this.hashGetter
+}
+
+func (this *HashGenerator) New(length int) *HashGenerator {
+	this.hashGetter = make(chan string)
+	this.length = length
+	this.init()
+	return this
+}
+
+func NewHashGen(length int) *HashGenerator {
+	return newHashGen(length)
+}
+
+func newHashGen(length int) *HashGenerator {
+	hashGen := &HashGenerator{
+		make(chan string),
+		length,
+	}
+	hashGen.init()
+	return hashGen
 }

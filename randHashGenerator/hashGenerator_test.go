@@ -78,11 +78,24 @@ func Test_Get_4(t *testing.T) {
 	t.Log("第4个测试结束")
 }
 
-func NewHashGen(length int) *HashGenerator {
-	hashGen = &HashGenerator{
-		make(chan string),
-		length,
+func Test_Get_5(t *testing.T) {
+	length := 8
+	hashGen = new(HashGenerator).New(length)
+	randStr = hashGen.Get()
+	if len(randStr) == length {
+		t.Log("第5个测试:", randStr)
+	} else {
+		t.Error("第5个测试没通过")
 	}
-	hashGen.init()
-	return hashGen
+}
+
+func Test_Get_6(t *testing.T) {
+	length := 8
+	hashGen = NewHashGen(length)
+	randStr = hashGen.Get()
+	if len(randStr) == length {
+		t.Log("第6个测试:", randStr)
+	} else {
+		t.Error("第6个测试没通过")
+	}
 }
