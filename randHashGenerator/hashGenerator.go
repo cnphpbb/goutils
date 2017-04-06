@@ -75,6 +75,9 @@ func NewHashGen(length int) *HashGenerator {
 }
 
 func newHashGen(length int) *HashGenerator {
+	if length <= 3 {
+		panic("args `length` length >= 3 !")
+	}
 	hashGen := &HashGenerator{
 		make(chan string),
 		length,
