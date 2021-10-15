@@ -1,4 +1,4 @@
-package randHashGenerator
+package go_utils
 
 import (
 	"crypto/rand"
