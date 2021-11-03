@@ -1,3 +1,3 @@
-module github.com/cnphpbb/go_utils
+module github.com/cnphpbb/goutils
 
 go 1.17
