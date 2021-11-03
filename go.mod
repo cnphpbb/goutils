@@ -1,3 +1,3 @@
-module github.com/cnphpbb/go_utils
+module go_utils
 
 go 1.13
