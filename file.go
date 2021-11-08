@@ -2,8 +2,10 @@ package goutils
 
 import (
 	"io/ioutil"
+	"log"
 	"os"
 	"path"
+	"strings"
 )
 
 // IsFile returns true if given path is a file,
@@ -26,4 +28,21 @@ func IsExist(path string) bool {
 func WriteFile(filename string, data []byte) error {
 	os.MkdirAll(path.Dir(filename), os.ModePerm)
 	return ioutil.WriteFile(filename, data, 0644)
+}
+
+func UserHomeDir() string {
+	return os.Getenv("HOME")
+}
+
+func ConversionInPath(inPath string) string {
+	log.Println("Func::ConversionInpath:inpath to:: ", inPath)
+	if inPath == "~" || strings.HasPrefix(inPath, "~"+string(os.PathSeparator)) {
+		inPath = UserHomeDir() + inPath[1:]
+	}
+	if inPath == "$HOME" || strings.HasPrefix(inPath, "$HOME"+string(os.PathSeparator)) {
+		inPath = UserHomeDir() + inPath[5:]
+	}
+
+	inPath = os.ExpandEnv(inPath)
+	return inPath
 }
